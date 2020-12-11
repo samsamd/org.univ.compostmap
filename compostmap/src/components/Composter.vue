@@ -1,8 +1,8 @@
 <template>
   <h1>Compost {{ id }}</h1>
-  Adresse: {{ adresse }}
+  <a :href="url">Adresse: {{ adresse }}</a>
   <div class="compost-image">
-    <img v-bind:src="image" />
+    <img :src="image" />
   </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
       id: 42,
       adresse: "28 rue des plantes en pots",
       image: "./assets/img/compost1.png",
+      url: "https://vuejs.org/",
     };
   },
 };
