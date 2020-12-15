@@ -1,7 +1,7 @@
 <template>
   <h1>Compost {{ id }}</h1>
-  <p>
-    {{ responsables }}
+  <p v-for="responsable in responsables" v-bind:key="responsable.last_name">
+    - {{ responsable.first_name }} {{ responsable.last_name }}
   </p>
 
   <a :href="url">Adresse: {{ adresse }}</a>
