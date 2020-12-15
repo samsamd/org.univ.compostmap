@@ -1,8 +1,16 @@
 <template>
   <h1>Compost {{ id }}</h1>
-  <p v-for="responsable in responsables" v-bind:key="responsable.last_name">
-    - {{ responsable.first_name }} {{ responsable.last_name }}
-  </p>
+
+  Horaires d'ouvertures:
+  <ul>
+    <li
+      v-for="openingSchedule in openingSchedules"
+      v-bind:key="openingSchedule.day"
+    >
+      {{ openingSchedule.day }} : De {{ openingSchedule.opening_hour }}h à
+      {{ openingSchedule.closing_hour }}h
+    </li>
+  </ul>
 
   <a :href="url">Adresse: {{ adresse }}</a>
   <p v-if="isOpen">Ouvert</p>
@@ -22,19 +30,13 @@ export default {
       image: "./assets/img/compost1.png",
       isOpen: true,
       url: "https://vuejs.org/",
-      responsables: [
-        {
-          first_name: "Alex",
-          last_name: "Morel",
-        },
-        {
-          first_name: "Amandine",
-          last_name: "Lagarde",
-        },
-        {
-          first_name: "Pascal",
-          last_name: "André",
-        },
+      openingSchedules: [
+        { day: "Lundi", opening_hour: 9, closing_hour: 12 },
+        { day: "Mardi", opening_hour: 11, closing_hour: 14 },
+        { day: "Mercredi", opening_hour: 11, closing_hour: 14 },
+        { day: "Jeudi", opening_hour: 11, closing_hour: 14 },
+        { day: "Vendredi", opening_hour: 11, closing_hour: 14 },
+        { day: "Samedi", opening_hour: 14, closing_hour: 20 },
       ],
     };
   },
