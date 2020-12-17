@@ -1,14 +1,17 @@
 <template>
   <h1>Compost {{ id }}</h1>
 
-  <button v-on:click="myClickMethod">Click me !</button>
-  <br />
+  <button v-on:click="addOpeningSchedule">Ajouter horaire d'ouverture</button>
+  <p>
+    {{ focusedDay }}
+  </p>
 
   Horaires d'ouvertures:
   <ul>
     <li
       v-for="openingSchedule in openingSchedules"
       v-bind:key="openingSchedule.day"
+      v-on:mouseout="updateFocusedDay(openingSchedule)"
     >
       {{ openingSchedule.day }} : De {{ openingSchedule.opening_hour }}h à
       {{ openingSchedule.closing_hour }}h
@@ -19,7 +22,7 @@
   <p v-if="isOpen">Ouvert</p>
   <p v-else>Fermé</p>
   <div class="compost-image">
-    <img :src="image" />
+    <img :src="image" v-on:mouseover="removeFirstOpeningSchedule" />
   </div>
 </template>
 
@@ -33,6 +36,7 @@ export default {
       image: "./assets/img/compost1.png",
       isOpen: true,
       url: "https://vuejs.org/",
+      focusedDay: "",
       openingSchedules: [
         { day: "Lundi", opening_hour: 9, closing_hour: 12 },
         { day: "Mardi", opening_hour: 11, closing_hour: 14 },
@@ -44,9 +48,20 @@ export default {
     };
   },
   methods: {
-    myClickMethod() {
-      this.adresse += "!!";
-      this.id += "!!";
+    addOpeningSchedule() {
+      this.openingSchedules.push({
+        day: "Dimanche",
+        opening_hour: 9,
+        closing_hour: 12,
+      });
+    },
+
+    removeFirstOpeningSchedule() {
+      this.openingSchedules.pop();
+    },
+
+    updateFocusedDay(schedule) {
+      this.focusedDay = schedule.day;
     },
   },
 };
