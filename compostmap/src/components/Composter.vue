@@ -1,7 +1,8 @@
 <template>
   <h1>Compost {{ id }}</h1>
 
-  <button v-on:click="id += '!'">Click me !</button>
+  <button v-on:click="myClickMethod">Click me !</button>
+  <br />
 
   Horaires d'ouvertures:
   <ul>
@@ -41,6 +42,12 @@ export default {
         { day: "Samedi", opening_hour: 14, closing_hour: 20 },
       ],
     };
+  },
+  methods: {
+    myClickMethod() {
+      this.adresse += "!!";
+      this.id += "!!";
+    },
   },
 };
 </script>
