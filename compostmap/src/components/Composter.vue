@@ -1,6 +1,8 @@
 <template>
   <h1>Compost {{ id }}</h1>
 
+  <button v-on:click="id += '!'">Click me !</button>
+
   Horaires d'ouvertures:
   <ul>
     <li
