@@ -16,7 +16,7 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4">Composter {{ id }}</p>
+          <p class="title is-4">Composter {{ composterId }}</p>
           <p class="subtitle is-6">{{ focusedDay }}</p>
         </div>
       </div>
@@ -50,9 +50,11 @@
 <script>
 export default {
   name: "Composter",
+  props: {
+      composterId: Number
+  },
   data() {
     return {
-      id: 42,
       adresse: "28 rue des plantes en pots, 4400 Toulouse",
       image: "./assets/img/compost1.png",
       isOpen: true,

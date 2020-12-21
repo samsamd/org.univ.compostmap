@@ -1,10 +1,28 @@
 <template>
-  <div class="columns is-multiline">
-    <Composter
-      v-for="i in 150"
-      :key="i"
-      class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen"
-    />
+  <div>
+    <p class="columns">
+      <button
+        class="button is-primary"
+        @click="composters.push({ id: nextComposterId++ })"
+      >
+        Add Composter {{ nextComposterId }}
+      </button>
+      <button
+        class="button is-danger is-quarter"
+        @click="composters.splice(0, 1)"
+        v-if="composters.length > 0"
+      >
+        Remove composter {{ composters[0].id }}
+      </button>
+    </p>
+    <div class="columns is-multiline">
+      <Composter
+        v-for="composter in composters"
+        :key="composter.id"
+        class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen"
+        :composter-id="composter.id"
+      />
+    </div>
   </div>
 </template>
 
@@ -15,6 +33,12 @@ export default {
   name: "App",
   components: {
     Composter,
+  },
+  data() {
+    return {
+      nextComposterId: 1,
+      composters: new Array(),
+    };
   },
 };
 </script>
