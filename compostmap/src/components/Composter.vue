@@ -1,28 +1,49 @@
 <template>
-  <h1>Compost {{ id }}</h1>
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img
+          src="https://bulma.io/images/placeholders/1280x960.png"
+          alt="Placeholder image"
+        />
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img :src="image" v-on:mouseover="removeFirstOpeningSchedule" />
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">Composter {{ id }}</p>
+          <p class="subtitle is-6">{{ focusedDay }}</p>
+        </div>
+      </div>
 
-  <button v-on:click="addOpeningSchedule">Ajouter horaire d'ouverture</button>
-  <p>
-    {{ focusedDay }}
-  </p>
+      <div class="content">
+        <p>
+          Horaires d'ouvertures:
+          <ul>
+            <li
+              v-for="openingSchedule in openingSchedules"
+              v-bind:key="openingSchedule.day"
+              v-on:mouseout="updateFocusedDay(openingSchedule)"
+            >
+              {{ openingSchedule.day }} : De {{ openingSchedule.opening_hour }}h à
+              {{ openingSchedule.closing_hour }}h
+            </li>
+          </ul>
 
-  Horaires d'ouvertures:
-  <ul>
-    <li
-      v-for="openingSchedule in openingSchedules"
-      v-bind:key="openingSchedule.day"
-      v-on:mouseout="updateFocusedDay(openingSchedule)"
-    >
-      {{ openingSchedule.day }} : De {{ openingSchedule.opening_hour }}h à
-      {{ openingSchedule.closing_hour }}h
-    </li>
-  </ul>
-
-  <a :href="url">Adresse: {{ adresse }}</a>
-  <p v-if="isOpen">Ouvert</p>
-  <p v-else>Fermé</p>
-  <div class="compost-image">
-    <img :src="image" v-on:mouseover="removeFirstOpeningSchedule" />
+          <button v-on:click="addOpeningSchedule" class="button is-primary">
+            Ajouter horaire d'ouverture
+          </button>
+        </p>
+        <a :href="url">Adresse: {{ adresse }}</a>
+        <p v-if="isOpen">Ouvert</p>
+        <p v-else>Fermé</p>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -1,5 +1,7 @@
 <template>
-  <Composter />
+  <div style="margin:10px;width:400px">
+    <Composter />
+  </div>
 </template>
 
 <script>
