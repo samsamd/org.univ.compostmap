@@ -16,7 +16,7 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4">Composter {{ composterId }}</p>
+          <p class="title is-4">{{ componentTitle }}</p>
           <p class="subtitle is-6">{{ focusedDay }}</p>
         </div>
       </div>
@@ -69,6 +69,15 @@ export default {
         { day: "Samedi", opening_hour: 14, closing_hour: 20 },
       ],
     };
+  },
+  computed: {
+    componentTitle() {
+      let evenOrOdd = 'impair'
+      if (this.composterId %2 == 0) {
+        evenOrOdd = 'pair'
+      }
+      return 'Composter ' + this.composterId + ' (' + evenOrOdd + ')'
+    }
   },
   methods: {
     addOpeningSchedule() {
