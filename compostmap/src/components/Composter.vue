@@ -1,7 +1,7 @@
 <template>
   <div class="composter">
     <div class="card" :class="{ 'composter-opened': isOpen, 'composter-closed': !isOpen}">
-      <div class="card-image">
+      <div class="card-image" :style="{ cursor: openingSchedules.length > 5 ? 'pointer': ''}">
         <figure class="image is-4by3">
           <img
             src="https://bulma.io/images/placeholders/1280x960.png"
@@ -20,7 +20,7 @@
             <p class="title is-4">{{ componentTitle }}</p>
             <p class="subtitle is-6">{{ focusedDay }}</p>
           </div>
-        </div>
+        </div>       
 
         <div class="content">
           <p>
@@ -36,13 +36,16 @@
               </li>
             </ul>
 
-            <button v-on:click="addOpeningSchedule" class="button is-primary">
-              Ajouter horaire d'ouverture
-            </button>
+          <button v-on:click="addOpeningSchedule" class="button is-primary">
+            Ajouter horaire d'ouverture
+          </button>
           </p>
-          <a :href="url">Adresse: {{ adresse }}</a>
-          <p v-if="isOpen">Ouvert</p>
-          <p v-else>Fermé</p>
+          <div  :class="{ 'adresse-in-toulouse': adresse.indexOf('Toulouse') > -1, 'adresse-in-nantes': adresse.indexOf('Nantes') > -1, 'adresse-opened': isOpen}">
+            <a :href="url">
+              Adresse: {{ adresse }}</a>
+            <p v-if="isOpen">Ouvert</p>
+            <p v-else>Fermé</p>
+          </div>
         </div>
       </div>
     </div>
@@ -57,7 +60,6 @@ export default {
   },
   data() {
     return {
-      adresse: "28 rue des plantes en pots, 4400 Toulouse",
       image: "./assets/img/compost1.png",
       url: "https://vuejs.org/",
       focusedDay: "",
@@ -77,6 +79,9 @@ export default {
     },
     isOpen() {
       return this.composterId %2 == 0 && this.openingSchedules.length > 0
+    },
+    adresse() {
+      return '28 rue des plantes en pots ' + (this.composterId % 3 == 0 ? '4400 Nantes' : 'Toulouse')
     }
   },
   methods: {
@@ -112,5 +117,14 @@ export default {
   background-color: #F5F5F5;
   border: 2px dashed #C0C0C0;
   margin: 10px;
+}
+.adresse-in-toulouse {
+  background-color: pink;
+}
+.adresse-in-nantes {
+  background-color: yellow;
+}
+.adresse-opened {
+  font-weight: bolder;
 }
 </style>
