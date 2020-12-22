@@ -1,5 +1,10 @@
 <template>
-  <div class="card">
+  <div class="card" :style="{ 
+    backgroundColor: isOpen ? '#A6D785' : '#F5F5F5',
+    borderColor: isOpen ? '#3B5E2B' : '#C0C0C0',
+    borderStyle: isOpen ? 'solid' : 'dashed',
+    margin: '10px',
+    borderWidth: composterId + 'px'}">
     <div class="card-image">
       <figure class="image is-4by3">
         <img
