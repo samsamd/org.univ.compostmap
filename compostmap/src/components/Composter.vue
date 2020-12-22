@@ -57,7 +57,6 @@ export default {
     return {
       adresse: "28 rue des plantes en pots, 4400 Toulouse",
       image: "./assets/img/compost1.png",
-      isOpen: true,
       url: "https://vuejs.org/",
       focusedDay: "",
       openingSchedules: [
@@ -72,11 +71,10 @@ export default {
   },
   computed: {
     componentTitle() {
-      let evenOrOdd = 'impair'
-      if (this.composterId %2 == 0) {
-        evenOrOdd = 'pair'
-      }
-      return 'Composter ' + this.composterId + ' (' + evenOrOdd + ')'
+      return 'Composter ' + this.composterId
+    },
+    isOpen() {
+      return this.composterId %2 == 0 && this.openingSchedules.length > 0
     }
   },
   methods: {
