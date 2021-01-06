@@ -1,8 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import CompostersList from '../components/CompostersList.vue'
 import AboutPage from '../components/AboutPage.vue'
+import HomePage from '../components/HomePage.vue'
 
 const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: HomePage
+  },
   {
     path: '/composters',
     name: 'CompostersList',
