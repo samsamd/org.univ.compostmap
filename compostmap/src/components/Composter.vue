@@ -56,7 +56,7 @@
 export default {
   name: "Composter",
   props: {
-      composterId: Number
+      composterId: String
   },
   data() {
     return {
