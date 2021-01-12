@@ -6,6 +6,8 @@ createApp(App)
     .use(router)
     .mount('#app')
 
+testPromise()
+
 function asyncFailIfMust(mustFail) {
     return new Promise(function (resolve, reject) {
         setTimeout(() => {
@@ -14,31 +16,26 @@ function asyncFailIfMust(mustFail) {
             } else {
                 resolve("Resolved");
             }
-        }, 3000);
+        }, 3000)
   });
 }
 
-console.log("asyncFailIfMust(true)");
-asyncFailIfMust(true)
-    .then(result => {
-        // Ici la promesse est résolue, on a accès au résultat
+async function testPromise() {
+    try {
+        console.log("asyncFailIfMust(true)")
+        var result = await asyncFailIfMust(true)
         console.log("asyncFailIfMust(true) - Success ", result)
-    })
-    .catch(failure => {
-        // Ici la promesse est rejetée, on a accès à la cause d'échec
+    } catch (failure) {
         console.error("asyncFailIfMust(true) - Failure :( ", failure)
-    })
-
-
-console.log("asyncFailIfMust(false)");
-asyncFailIfMust(false)
-    .then(result => {
-        // Ici la promesse est résolue, on a accès au résultat
-        console.log("asyncFailIfMust(false) - Success ", result)
-    })
-    .catch(failure => {
-        // Ici la promesse est rejetée, on a accès à la cause d'échec
+    }
+   
+    try {
+        console.log("asyncFailIfMust(false)")
+        var result2 = await asyncFailIfMust(false)
+        console.log("asyncFailIfMust(false) - Success ", result2)
+    } catch (failure) {
         console.error("asyncFailIfMust(false) - Failure :( ", failure)
-    })
+    }
 
-console.log("All call dones, waiting for promises...");
+    console.log("All calls done, we already waited for promises")
+}
