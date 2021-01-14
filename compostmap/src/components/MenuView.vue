@@ -52,10 +52,6 @@
             </a>
           </div>
         </div>
-
-        <router-link :to="{ name: 'ComposterDetails', params: { id: 42 } }">
-          Composteur 42
-        </router-link>
       </div>
 
       <div class="navbar-end">

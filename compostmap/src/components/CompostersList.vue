@@ -19,13 +19,14 @@
       v-for="composter in composters"
       :key="composter.id"
       class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen"
-      :composter-id="composter.id"
+      :composter="composter"
     />
   </div>
 </template>
 
 <script>
 import Composter from "./Composter.vue";
+import axios from "axios";
 
 export default {
   name: "CompostersList",
@@ -37,6 +38,18 @@ export default {
       nextComposterId: 1,
       composters: new Array(),
     };
+  },
+  mounted() {
+    axios
+      .get(
+        "https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=512042839_composteurs-quartier-nantes-metropole&rows=100"
+      )
+      .then((response) => {
+        this.composters = response.data.records;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>
