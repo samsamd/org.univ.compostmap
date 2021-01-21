@@ -20,6 +20,7 @@
       :key="composter.id"
       class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen"
       :composter="composter"
+      @click="showComposterDetails(composter)"
     />
   </div>
 </template>
@@ -50,6 +51,14 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+  methods: {
+    showComposterDetails(composter) {
+      this.$router.push({
+        name: "ComposterDetails",
+        params: { id: composter.recordid },
+      });
+    },
   },
 };
 </script>
