@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">compostmap</string>
+    <string name="title_activity_main">compostmap</string>
+    <string name="package_name">org.univ.compostmap</string>
+    <string name="custom_url_scheme">org.univ.compostmap</string>
+</resources>
