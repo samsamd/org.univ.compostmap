@@ -20,6 +20,7 @@
       :key="composter.id"
       class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen"
       :composter="composter"
+      :userLocation="currentUserLocation"
       @click="showComposterDetails(composter)"
     />
   </div>
@@ -28,6 +29,8 @@
 <script>
 import Composter from "./Composter.vue";
 import axios from "axios";
+import { Plugins } from "@capacitor/core";
+const { Geolocation } = Plugins;
 
 export default {
   name: "CompostersList",
@@ -38,6 +41,7 @@ export default {
     return {
       nextComposterId: 1,
       composters: new Array(),
+      currentUserLocation: { latitude: 0, longitude: 0 },
     };
   },
   mounted() {
@@ -51,6 +55,10 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+
+    Geolocation.getCurrentPosition().then((location) => {
+      this.currentUserLocation = location.coords;
+    });
   },
   methods: {
     showComposterDetails(composter) {
