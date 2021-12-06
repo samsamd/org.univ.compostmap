@@ -1,10 +1,14 @@
 <template>
-  <div style="margin:10px;width:400px">
-    <Composter />
+  <div class ="columns is-multiline">  
+      <Composter class="column is-one-quarter-widescreen is-half-tablet is-one-third-desktop" 
+      v-for = " i in 150"
+      :key="i"
+      />
   </div>
 </template>
 
 <script>
+
 import Composter from "./components/Composter.vue";
 
 export default {
