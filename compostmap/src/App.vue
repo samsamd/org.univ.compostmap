@@ -2,28 +2,20 @@
   <div>
     <!-- MenuView -->
     <MenuView />
-
+ 
     <!-- Content -->
     <div class="container">
-      <!-- About Page -->
-      <AboutPage message="à propos" />
-
-      <!-- Composters list -->
-      <CompostersList />
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import CompostersList from "./components/CompostersList.vue";
 import MenuView from "./components/MenuView.vue";
-import AboutPage from "./components/AboutPage.vue";
 export default {
   name: "App",
   components: {
     MenuView,
-    CompostersList,
-    AboutPage,
   },
 };
 </script>
