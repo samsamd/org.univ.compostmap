@@ -40,8 +40,7 @@
           </button>
         </p>
         <a :href="url">Adresse: {{ adresse }}</a>
-        <p v-if="isOpen">Ouvert</p>
-        <p v-else>Fermé</p>
+        <p>{{isOpen}}</p>
       </div>
     </div>
   </div>
@@ -57,8 +56,7 @@ export default {
     return {
       adresse: "28 rue des plantes en pots, 4400 Toulouse",
       image: "./assets/img/compost1.png",
-      isOpen: true,
-      url: "https://vuejs.org/",
+      url: "https://vuejs.org/",    
       focusedDay: "",
       openingSchedules: [
         { day: "Lundi", opening_hour: 9, closing_hour: 12 },
@@ -69,6 +67,22 @@ export default {
         { day: "Samedi", opening_hour: 14, closing_hour: 20 },
       ],
     };
+  },
+  computed: {
+    isOpen() {
+      let open = false;
+      if(this.composterId % 2 == 0) {
+        open = true;
+      }
+      if(this.openingSchedules.length==0) {
+        open = false;
+      }
+      if (open == true) {
+        return "Ouvert";
+      } else {
+        return "Fermé";
+      }
+    } 
   },
   methods: {
     addOpeningSchedule() {
