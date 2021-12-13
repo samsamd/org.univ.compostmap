@@ -47,7 +47,7 @@
             </a>
             <a
               class="navbar-item"
-              href="https://github.com/alexsedlex/org.univ.compostmap"
+              href="https://github.com/samsamd/org.univ.compostmap"
               target="github"
             >
               Voir le code source
