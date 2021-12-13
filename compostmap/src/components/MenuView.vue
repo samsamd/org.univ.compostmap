@@ -41,6 +41,10 @@
             <a class="navbar-item">
               Carte
             </a>
+            <router-link class="navbar-item" to ="/composter-detail/42">
+                Composteur 42
+            </router-link>
+            
             <hr class="navbar-divider" />
             <router-link class="navbar-item" to="/about">
               A propos

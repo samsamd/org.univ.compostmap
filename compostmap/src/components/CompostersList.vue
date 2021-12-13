@@ -2,7 +2,7 @@
   <p class="columns">
     <button
       class="button is-primary"
-      @click="composters.push({ id: nextComposterId++ })"
+      @click="composters.push({ id: (nextComposterId++).toString() })"
     >
       Add Composter {{ nextComposterId }}
     </button>
