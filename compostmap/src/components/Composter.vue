@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="card-image">
+    <div class="card-image" :style="{'cursor' : openingSchedules.length>5 ? 'pointer' : 'default'}">
       <figure class="image is-4by3">
         <img
           src="https://bulma.io/images/placeholders/1280x960.png"
@@ -39,8 +39,14 @@
             Ajouter horaire d'ouverture
           </button>
         </p>
-        <a :href="url">Adresse: {{ adresse }}</a>
-        <p>{{isOpen}}</p>
+        <div :class="{
+          'composter-opened':isOpen,
+          'composter-closed':!isOpen
+        }">
+          <a :href="url">Adresse: {{ adresse }}</a>
+          <p v-if="isOpen">Ouvert</p>
+          <p v-else> Fermé </p>
+        </div>
       </div>
     </div>
   </div>
@@ -77,11 +83,7 @@ export default {
       if(this.openingSchedules.length==0) {
         open = false;
       }
-      if (open == true) {
-        return "Ouvert";
-      } else {
-        return "Fermé";
-      }
+      return open;
     } 
   },
   methods: {
@@ -101,3 +103,15 @@ export default {
   },
 };
 </script>
+<style>
+ .composter-opened {
+	background-color: #A6D785;
+	border: 2px solid #3B5E2B;
+  font-weight: bold;
+ }
+ .composter-closed {
+	background-color: #F5F5F5;
+	border: 2px dashed #C0C0C0;
+ }
+
+</style>
