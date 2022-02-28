@@ -1,51 +1,51 @@
 <template>
   <div class="composter">
-    <div class="card" :class="{ 'composter-opened': isOpen, 'composter-closed': !isOpen}">
-      <div class="card-image" :style="{ cursor: openingSchedules.length > 5 ? 'pointer': ''}">
-        <figure class="image is-4by3">
-          <img
-            :src="logo"
-            alt="Placeholder image"
-          />
-        </figure>
-      </div>
-      <div class="card-content">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img :src="image" v-on:mouseover="removeFirstOpeningSchedule" />
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-4">{{ componentTitle }}</p>
-            <p class="subtitle is-6">{{ focusedDay }}</p>
-          </div>
-        </div>       
+    <div
+      class="card"
+      :class="{
+        'composter-residence':
+          composter.fields.categorie.indexOf('idence') > -1,
+        'composter-quartier':
+          composter.fields.categorie.indexOf('uartier') > -1,
+      }"
+    >
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img
+          :src="logo"
+          alt="Placeholder image"
+        />
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img :src="image" v-on:mouseover="removeFirstOpeningSchedule" />
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">{{ composter.fields.nom }}</p>
+          <p class="subtitle is-6">{{ composter.fields.categorie }}</p>
+        </div>
+      </div>       
 
         <div class="content">
           <p>
-            Horaires d'ouvertures:
-            <ul>
-              <li
-                v-for="openingSchedule in openingSchedules"
-                v-bind:key="openingSchedule.day"
-                v-on:mouseout="updateFocusedDay(openingSchedule)"
-              >
-                {{ openingSchedule.day }} : De {{ openingSchedule.opening_hour }}h à
-                {{ openingSchedule.closing_hour }}h
-              </li>
-            </ul>
-
-          <button v-on:click="addOpeningSchedule" class="button is-primary">
-            Ajouter horaire d'ouverture
-          </button>
+            {{ composter.fields.adresse }} <br />
+            {{ composter.fields.lieu }}
           </p>
-          <div  :class="{ 'adresse-in-toulouse': adresse.indexOf('Toulouse') > -1, 'adresse-in-nantes': adresse.indexOf('Nantes') > -1, 'adresse-opened': isOpen}">
-            <a :href="url">
-              Adresse: {{ adresse }}</a>
-            <p v-if="isOpen">Ouvert</p>
-            <p v-else>Fermé</p>
-          </div>
+          <a :href="composter.fields.lien" target="out">
+            <button class="button is-primary">
+              Consulter site web
+            </button>
+          </a>
+          <br />
+          <a :href="googleMapsLink" target="out">
+            <button class="button is-info">
+              Ouvrir dans Google Maps
+            </button>
+          </a>
         </div>
       </div>
     </div>
@@ -56,48 +56,22 @@
 export default {
   name: "Composter",
   props: {
-      composterId: String
+      composter: {}
   },
   data() {
     return {
       image: "/assets/img/compost1.png",
       logo: "/assets/img/logofcn.png",
-      url: "https://vuejs.org/",
-      focusedDay: "",
-      openingSchedules: [
-        { day: "Lundi", opening_hour: 9, closing_hour: 12 },
-        { day: "Mardi", opening_hour: 11, closing_hour: 14 },
-        { day: "Mercredi", opening_hour: 11, closing_hour: 14 },
-        { day: "Jeudi", opening_hour: 11, closing_hour: 14 },
-        { day: "Vendredi", opening_hour: 11, closing_hour: 14 },
-        { day: "Samedi", opening_hour: 14, closing_hour: 20 },
-      ],
     };
   },
   computed: {
-    componentTitle() {
-      return 'Composter ' + this.composterId
-    },
-    isOpen() {
-      return this.composterId %2 == 0 && this.openingSchedules.length > 0
-    },
-    adresse() {
-      return '28 rue des plantes en pots ' + (this.composterId % 3 == 0 ? '4400 Nantes' : 'Toulouse')
-    }
-  },
-  methods: {
-    addOpeningSchedule() {
-      this.openingSchedules.push({
-        day: "Dimanche",
-        opening_hour: 9,
-        closing_hour: 12,
-      });
-    },
-    removeFirstOpeningSchedule() {
-      this.openingSchedules.pop();
-    },
-    updateFocusedDay(schedule) {
-      this.focusedDay = schedule.day;
+     googleMapsLink() {
+      return (
+        "https://maps.google.com/?q=" +
+        this.composter.fields.location[0] +
+        "," +
+        this.composter.fields.location[1]
+      );
     },
   },
 };
@@ -107,23 +81,12 @@ export default {
 .composter {
   padding: 10px;
 }
-.composter-opened {
-  background-color: #A6D785;
-  border: 2px solid #3B5E2B;
+.composter-quartier {
+  background-color: #7ab2df;
   margin: 10px;
 }
-.composter-closed {
-  background-color: #F5F5F5;
-  border: 2px dashed #C0C0C0;
+.composter-residence {
+  background-color: #39a079;
   margin: 10px;
-}
-.adresse-in-toulouse {
-  background-color: pink;
-}
-.adresse-in-nantes {
-  background-color: yellow;
-}
-.adresse-opened {
-  font-weight: bolder;
 }
 </style>
