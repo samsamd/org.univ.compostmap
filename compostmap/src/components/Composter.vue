@@ -4,7 +4,7 @@
       <div class="card-image" :style="{ cursor: openingSchedules.length > 5 ? 'pointer': ''}">
         <figure class="image is-4by3">
           <img
-            :src="logopsg"
+            :src="logo"
             alt="Placeholder image"
           />
         </figure>
@@ -60,8 +60,8 @@ export default {
   },
   data() {
     return {
-      image: "./assets/img/compost1.png",
-      logopsg: "./assets/img/logofcn.png",
+      image: "/assets/img/compost1.png",
+      logo: "/assets/img/logofcn.png",
       url: "https://vuejs.org/",
       focusedDay: "",
       openingSchedules: [

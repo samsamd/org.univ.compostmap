@@ -1,4 +1,5 @@
 <template>
+<div>
   <p class="columns">
     <button
       class="button is-primary"
@@ -21,6 +22,7 @@
       class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen"
       :composter-id="composter.id"
     />
+  </div>
   </div>
 </template>
 
